@@ -118,8 +118,41 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="backmoving1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\EnemySprites\backmoving1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="backmoving2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\EnemySprites\backmoving2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="BGmusic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\WeaponIMG\BGmusic.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DeathSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\EnemySprites\death.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="EnemyDeath1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\EnemySprites\EnemyDeath1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EnemyDeath2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\EnemySprites\EnemyDeath2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EnemyMove1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\EnemySprites\EnemyMove1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EnemyMove2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\EnemySprites\EnemyMove2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EnemyReady" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\EnemySprites\EnemyReadyToShoot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EnemyShooting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\EnemySprites\EnemyShooting.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EnemyShootSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\WeaponIMG\shootsound.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="FloorTexture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\WeaponIMG\floor.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="reload1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\WeaponIMG\reload1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -138,6 +171,21 @@
   </data>
   <data name="ShootSound" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\WeaponIMG\shootsound.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="sideleft1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\EnemySprites\sideleftfoot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sidemidwalk" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\EnemySprites\sidemidwalk.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sideleft2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\EnemySprites\siderightfoot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="skybox" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\WeaponIMG\skybox.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WallTexture" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\WeaponIMG\wall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="WeaponIdle" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\WeaponIMG\Weaponidle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
