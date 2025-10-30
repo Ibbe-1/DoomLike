@@ -61,11 +61,22 @@ namespace DoomLike.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream BackgroundMusic {
+        internal static System.Drawing.Bitmap backmoving1 {
             get {
-                return ResourceManager.GetStream("BackgroundMusic", resourceCulture);
+                object obj = ResourceManager.GetObject("backmoving1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap backmoving2 {
+            get {
+                object obj = ResourceManager.GetObject("backmoving2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -75,6 +86,94 @@ namespace DoomLike.Properties {
         internal static System.IO.UnmanagedMemoryStream BGmusic {
             get {
                 return ResourceManager.GetStream("BGmusic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream DeathSound {
+            get {
+                return ResourceManager.GetStream("DeathSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EnemyDeath1 {
+            get {
+                object obj = ResourceManager.GetObject("EnemyDeath1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EnemyDeath2 {
+            get {
+                object obj = ResourceManager.GetObject("EnemyDeath2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EnemyMove1 {
+            get {
+                object obj = ResourceManager.GetObject("EnemyMove1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EnemyMove2 {
+            get {
+                object obj = ResourceManager.GetObject("EnemyMove2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EnemyReady {
+            get {
+                object obj = ResourceManager.GetObject("EnemyReady", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap EnemyShooting {
+            get {
+                object obj = ResourceManager.GetObject("EnemyShooting", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream EnemyShootSound {
+            get {
+                return ResourceManager.GetStream("EnemyShootSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap FloorTexture {
+            get {
+                object obj = ResourceManager.GetObject("FloorTexture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -133,6 +232,56 @@ namespace DoomLike.Properties {
         internal static System.IO.UnmanagedMemoryStream ShootSound {
             get {
                 return ResourceManager.GetStream("ShootSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sideleft1 {
+            get {
+                object obj = ResourceManager.GetObject("sideleft1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sideleft2 {
+            get {
+                object obj = ResourceManager.GetObject("sideleft2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sidemidwalk {
+            get {
+                object obj = ResourceManager.GetObject("sidemidwalk", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap skybox {
+            get {
+                object obj = ResourceManager.GetObject("skybox", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WallTexture {
+            get {
+                object obj = ResourceManager.GetObject("WallTexture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
