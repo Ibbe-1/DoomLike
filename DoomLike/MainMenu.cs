@@ -21,7 +21,7 @@ namespace DoomLike
 
             Label infoLabel = new Label
             {
-                Text = "Resources belong to ID software.\nBackground music is from Oldschool Runescape, produced by Jagex Ltd.",
+                Text = "Weapon, NPC and wall sprite resources belong to ID software.\nBackground music is from Oldschool Runescape, produced by Jagex Ltd.",
                 AutoSize = false,
                 TextAlign = ContentAlignment.MiddleCenter, // center text inside label
                 Size = new Size(ClientSize.Width - 40, 60), // small margin on sides
