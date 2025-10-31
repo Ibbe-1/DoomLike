@@ -9,7 +9,10 @@ namespace DoomLike
         static void Main()
         {
             Application.EnableVisualStyles();
-            Application.Run(new DoomLikeGame());
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            // Start with the main menu
+            Application.Run(new MainMenu());
         }
     }
 }

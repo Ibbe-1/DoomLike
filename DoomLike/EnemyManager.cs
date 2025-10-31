@@ -14,6 +14,8 @@ namespace DoomLike
             Attacking,
             Death
         }
+        // Event for when player is hit
+        public Action<int>? OnPlayerHit; 
 
         // Enemy sprites
         private Bitmap EnemyMove1;
@@ -288,6 +290,9 @@ namespace DoomLike
 
                         var enemyShootSound = new SoundPlayer(Properties.Resources.EnemyShootSound);
                         enemyShootSound.Play();
+
+                        if (enemy.CanSeePlayer)
+                            OnPlayerHit?.Invoke(10); // Deal 10 damage to player
                     }
                     else
                     {
