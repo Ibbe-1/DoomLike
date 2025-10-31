@@ -11,6 +11,14 @@ namespace DoomLike
 {
     public class DoomLikeGame : Form
     {
+
+
+        // HP manager
+        private PlayerHP playerHP = new PlayerHP();
+
+        // Game state
+        private bool isGameOver = false;
+
         // Enum to track what the weapon is doing
         private enum WeaponState { Idle, Shooting, Reloading }
 
@@ -49,6 +57,16 @@ namespace DoomLike
         private bool levelTransitioning = false;
         private int transitionTimer = 0;
 
+        // Background music files
+        private string music1;
+        private string music2;
+        // checks currently playing music
+        private string currentMusic;
+
+        // the int for our player, it will contain the HP values.
+        private int playerHealth = 100;
+        private int maxHealth = 100;
+
         public DoomLikeGame()
         {
             Text = "Doomlike";
@@ -79,16 +97,10 @@ namespace DoomLike
             ReloadSound = new SoundPlayer(Properties.Resources.ReloadSound);
             death = new SoundPlayer(Properties.Resources.DeathSound);
 
-            // Setup background music
-            bgMusicPlayer = new WindowsMediaPlayer();
-            string musicPath = Path.Combine(Application.StartupPath, "BGmusic.wav");
-            using (var rs = Properties.Resources.BGmusic)
-            using (var fs = new FileStream(musicPath, FileMode.Create, FileAccess.Write))
-                rs.CopyTo(fs);
-
-            bgMusicPlayer.URL = musicPath;
-            bgMusicPlayer.settings.setMode("loop", true);
-            bgMusicPlayer.controls.play();
+            // start background music
+            StartBackgroundMusic();
+            // registers damage to player
+            PlayerDamage();
 
             // Spawn initial enemies for level 1
             levelManager.Reset(enemyManager);
@@ -99,13 +111,70 @@ namespace DoomLike
 
             timer.Start();
             this.KeyDown += KeyboardInputs;
+
+
+        }
+
+        private void StartBackgroundMusic()
+        {
+            music1 = Path.GetTempFileName() + ".wav";
+            music2 = Path.GetTempFileName() + ".wav";
+
+            // temp file for music 1
+            using (var ms = Properties.Resources.BGmusic)
+            using (var fs = new FileStream(music1, FileMode.Create, FileAccess.Write))
+            {
+                ms.CopyTo(fs);
+            }
+            // temp file for music 2
+            using (var ms2 = Properties.Resources.BGmusic2)
+            using (var fs2 = new FileStream(music2, FileMode.Create, FileAccess.Write))
+            {
+                ms2.CopyTo(fs2);
+            }
+
+            bgMusicPlayer = new WindowsMediaPlayer();
+            bgMusicPlayer.settings.setMode("loop", true);
+
+            // Start playing initial music based on level
+            currentMusic = (levelManager.CurrentLevel > 3) ? music2 : music1;
+            bgMusicPlayer.URL = currentMusic;
+            bgMusicPlayer.controls.play();
+        }
+
+        private void PlayerDamage()
+        {
+            enemyManager.OnPlayerHit = (damage) =>
+            {
+                if (isGameOver) return; // prevent multiple calls after death
+
+                playerHealth -= damage;
+                // shows damage taken
+                playerHP.ShowDamage(damage);
+
+                var damageSound = new SoundPlayer(Properties.Resources.PlayerDamage);
+                damageSound.Play();
+
+                if (playerHealth <= 0)
+                {
+                    playerHealth = 0;
+                    var deathSound = new SoundPlayer(Properties.Resources.PlayerDeath);
+                    deathSound.Play();
+
+                    isGameOver = true; // stop the game
+                    GameOver();
+                }
+            };
         }
 
         private void GameLoop()
         {
+            if (isGameOver) return;
+
             // Animate weapon frames
             if (currentWeaponState == WeaponState.Shooting)
                 currentWeaponSprite = (currentWeaponSprite == weaponShoot1) ? weaponShoot2 : weaponShoot1;
+
             else if (currentWeaponState == WeaponState.Reloading)
                 currentWeaponSprite = (currentWeaponSprite == weaponReload1) ? weaponReload2 : weaponReload1;
 
@@ -115,53 +184,66 @@ namespace DoomLike
                 bullets[i].Update(levelManager.CurrentMap);
                 if (!bullets[i].Alive) { bullets.RemoveAt(i); continue; }
 
-                // Check for enemy hit
                 foreach (var enemy in enemyManager.Enemies)
                 {
-                    double dx = bullets[i].X - enemy.X, dy = bullets[i].Y - enemy.Y;
+                    double dx = bullets[i].X - enemy.X;
+                    double dy = bullets[i].Y - enemy.Y;
                     if (Math.Sqrt(dx * dx + dy * dy) < 0.5)
                     {
                         enemy.Health -= 50;
                         bullets[i].Alive = false;
+
                         if (enemy.Health <= 0)
                         {
                             var deathSound = new SoundPlayer(Properties.Resources.DeathSound);
                             deathSound.Play();
+
+                            // Heal the player when an enemy dies
+                            int healAmount = 20; // amount to heal
+                            playerHealth += healAmount;
+                            if (playerHealth > maxHealth) playerHealth = maxHealth; // cap at max health
+                            // shows amount healed
+                            playerHP.ShowHeal(healAmount);
                         }
                         break;
                     }
                 }
             }
 
-            // Update enemy positions and AI
+            // Update enemies
             enemyManager.UpdateEnemies(levelManager.CurrentMap, playerX, playerY);
 
-            // Check for level completion
-            if (levelManager.ShouldLoadNextLevel(enemyManager) && !levelTransitioning)
+            // Start level transition if all enemies are dead 
+            if (!levelTransitioning && enemyManager.Enemies.Count == 0)
             {
                 levelTransitioning = true;
-                transitionTimer = 60; // Wait 60 frames (about 1.2 seconds) before loading next level
+                transitionTimer = 30; // timer for next level transition
             }
 
-            // Handle level transition
+            // Handle level transition countdown
             if (levelTransitioning)
             {
                 transitionTimer--;
                 if (transitionTimer <= 0)
                 {
-                    // Load next level
                     levelManager.LoadNextLevel(enemyManager);
 
-                    // Reset player position
                     var startPos = levelManager.GetPlayerStartPosition();
                     playerX = startPos.x;
                     playerY = startPos.y;
                     playerAngle = startPos.angle;
 
-                    // Clear bullets
                     bullets.Clear();
-
                     levelTransitioning = false;
+
+                    // Optional: update background music based on level
+                    string nextMusic = (levelManager.CurrentLevel > 3) ? music2 : music1;
+                    if (currentMusic != nextMusic)
+                    {
+                        bgMusicPlayer.URL = nextMusic;
+                        bgMusicPlayer.controls.play();
+                        currentMusic = nextMusic;
+                    }
                 }
             }
 
@@ -201,6 +283,9 @@ namespace DoomLike
                 e.Graphics.DrawString(enemiesText, font, brush, 10, 35);
             }
 
+            // Draw player HP
+            playerHP.Draw(e.Graphics, playerHealth, maxHealth, ScreenHeight);
+
             // Draw level complete message during transition
             if (levelTransitioning)
             {
@@ -225,7 +310,7 @@ namespace DoomLike
         private void KeyboardInputs(object sender, KeyEventArgs e)
         {
             // Don't allow movement during level transition
-            if (levelTransitioning) return;
+            if (levelTransitioning || isGameOver) return;
 
             double moveSpeed = 0.3, rotSpeed = 0.2;
 
@@ -316,6 +401,39 @@ namespace DoomLike
             }
         }
 
+        // when closing the form, stop all timers and music so that game does not continue running in background
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            // Stop the main game loop
+            foreach (var t in this.Controls.OfType<Timer>())
+            {
+                t.Stop();
+                t.Dispose();
+            }
+
+            // Stop background music
+            if (bgMusicPlayer != null)
+            {
+                bgMusicPlayer.controls.stop();
+                bgMusicPlayer.close();
+                bgMusicPlayer = null;
+            }
+
+            // Mark game over 
+            isGameOver = true;
+        }
+
+        private void GameOver()
+        {
+            bgMusicPlayer.controls.stop();
+            MessageBox.Show("You have been defeated!", "Game Over");
+            this.Close();
+            MainMenu menu = new MainMenu();
+            menu.Show();
+        }
+
         // Helper method to run code after a delay
         private void StartTimer(int interval, Action action)
         {
@@ -333,8 +451,16 @@ namespace DoomLike
                 wallSprite?.Dispose();
                 floorSprite?.Dispose();
                 skybox?.Dispose();
+
+                if (bgMusicPlayer != null)
+                {
+                    bgMusicPlayer.controls.stop();
+                    bgMusicPlayer.close();
+                    bgMusicPlayer = null;
+                }
             }
             base.Dispose(disposing);
         }
+
     }
 }

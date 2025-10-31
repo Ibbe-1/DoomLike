@@ -1,0 +1,100 @@
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace DoomLike
+{
+    public class MainMenu : Form
+    {
+
+        private Button startButton;
+        private Button exitButton;
+
+        public MainMenu()
+        {
+            BackColor = Color.Gray; 
+
+            BackgroundImage = Properties.Resources.GameConsole;
+            BackgroundImageLayout = ImageLayout.Stretch;
+
+
+            Label infoLabel = new Label
+            {
+                Text = "Resources belong to ID software.\nBackground music is from Oldschool Runescape, produced by Jagex Ltd.",
+                AutoSize = false,
+                TextAlign = ContentAlignment.MiddleCenter, // center text inside label
+                Size = new Size(ClientSize.Width - 40, 60), // small margin on sides
+                Location = new Point(75, 20),
+                BackColor = Color.Transparent,
+                ForeColor = Color.White,
+                Font = new Font("Arial", 9, FontStyle.Bold)
+            };
+            Controls.Add(infoLabel);
+
+
+            Text = "DoomLike - Menu ";
+            ClientSize = new Size(400, 300);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            StartPosition = FormStartPosition.CenterScreen;
+
+            // Start Game button
+            startButton = new Button
+            {
+                Text = "Start Game",
+                Size = new Size(120, 40),
+                Location = new Point((ClientSize.Width - 120) / 2, 100)
+            };
+            startButton.Click += StartButton_Click;
+            Controls.Add(startButton);
+
+            // Exit button
+            exitButton = new Button
+            {
+                Text = "Exit",
+                Size = new Size(120, 40),
+                Location = new Point((ClientSize.Width - 120) / 2, 160)
+            };
+            exitButton.Click += ExitButton_Click;
+            Controls.Add(exitButton);
+
+            // Info label at the bottom
+            Label info = new Label
+            {
+                Text = "For fun hobby project made by Ibbe-1",
+                AutoSize = false,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Width = ClientSize.Width,
+                Height = 30,
+                BackColor = Color.Transparent,
+                ForeColor = Color.White,
+                Font = new Font("Arial", 9, FontStyle.Bold)
+            };
+
+            info.Location = new Point(
+                (ClientSize.Width - info.Width) / 2,
+                ClientSize.Height - info.Height - 10
+            );
+
+            Controls.Add(info);
+        }
+
+        private void StartButton_Click(object sender, EventArgs e)
+        {
+            // Open the main game form
+            DoomLikeGame game = new DoomLikeGame();
+            game.Show();
+
+            this.Hide(); // hide the menu while the game runs
+
+            // Optionally: close menu when game is closed
+            game.FormClosed += (s, args) => this.Show();
+        }
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+    }
+}

@@ -92,6 +92,15 @@ namespace DoomLike.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
+        internal static System.IO.UnmanagedMemoryStream BGmusic2 {
+            get {
+                return ResourceManager.GetStream("BGmusic2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
         internal static System.IO.UnmanagedMemoryStream DeathSound {
             get {
                 return ResourceManager.GetStream("DeathSound", resourceCulture);
@@ -174,6 +183,34 @@ namespace DoomLike.Properties {
             get {
                 object obj = ResourceManager.GetObject("FloorTexture", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap GameConsole {
+            get {
+                object obj = ResourceManager.GetObject("GameConsole", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream PlayerDamage {
+            get {
+                return ResourceManager.GetStream("PlayerDamage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream PlayerDeath {
+            get {
+                return ResourceManager.GetStream("PlayerDeath", resourceCulture);
             }
         }
         
