@@ -10,7 +10,6 @@ namespace DoomLike
 
         private Button startButton;
         private Button exitButton;
-
         public MainMenu()
         {
             BackColor = Color.Gray; 
@@ -82,14 +81,12 @@ namespace DoomLike
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            // Open the main game form
-            DoomLikeGame game = new DoomLikeGame();
-            game.Show();
-
-            this.Hide(); // hide the menu while the game runs
-
-            // Optionally: close menu when game is closed
-            game.FormClosed += (s, args) => this.Show();
+            using (DoomLikeGame game = new DoomLikeGame(this))
+            {
+                this.Hide();
+                game.ShowDialog(); // modal game window
+                this.Show();       
+            }
         }
 
         private void ExitButton_Click(object sender, EventArgs e)

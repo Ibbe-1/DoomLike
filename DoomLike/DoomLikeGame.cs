@@ -5,6 +5,7 @@ using System.Media;
 using System.Windows.Forms;
 using WMPLib;
 using static DoomLike.Hitreg;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Timer = System.Windows.Forms.Timer;
 
 namespace DoomLike
@@ -12,6 +13,8 @@ namespace DoomLike
     public class DoomLikeGame : Form
     {
 
+        // Main menu instance, will help solve duplication issue.
+        private MainMenu mainMenu;
 
         // HP manager
         private PlayerHP playerHP = new PlayerHP();
@@ -67,11 +70,14 @@ namespace DoomLike
         private int playerHealth = 100;
         private int maxHealth = 100;
 
-        public DoomLikeGame()
+        public DoomLikeGame(MainMenu mainMenu)
         {
             Text = "Doomlike";
             ClientSize = new Size(ScreenWidth, ScreenHeight);
             this.DoubleBuffered = true;
+
+            // main menu instance
+            this.mainMenu = mainMenu;
 
             // Initialize the level manager
             levelManager = new LevelManager();
@@ -111,8 +117,7 @@ namespace DoomLike
 
             timer.Start();
             this.KeyDown += KeyboardInputs;
-
-
+            this.mainMenu = mainMenu;
         }
 
         private void StartBackgroundMusic()
@@ -428,10 +433,19 @@ namespace DoomLike
         private void GameOver()
         {
             bgMusicPlayer.controls.stop();
-            MessageBox.Show("You have been defeated!", "Game Over");
+
+            using (GameOverMenu goForm = new GameOverMenu())
+            {
+                goForm.GameOverForm(); 
+                goForm.ShowDialog();
+            }
+
+
+            // should now solve the duplication issue
+            if (mainMenu != null && !mainMenu.IsDisposed)
+                mainMenu.Show();  // show the preexisting menu
+
             this.Close();
-            MainMenu menu = new MainMenu();
-            menu.Show();
         }
 
         // Helper method to run code after a delay
