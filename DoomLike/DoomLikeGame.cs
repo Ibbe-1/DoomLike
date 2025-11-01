@@ -63,6 +63,10 @@ namespace DoomLike
         // Background music files
         private string music1;
         private string music2;
+        private string music3;
+        private string music4;
+        private string music5;
+
         // checks currently playing music
         private string currentMusic;
 
@@ -122,27 +126,42 @@ namespace DoomLike
 
         private void StartBackgroundMusic()
         {
-            music1 = Path.GetTempFileName() + ".wav";
-            music2 = Path.GetTempFileName() + ".wav";
+            // Create temp
+            var musicResources = new[]
+            {
+                Properties.Resources.BGmusic,
+                Properties.Resources.BGmusic2,
+                Properties.Resources.BGmusic3,
+                Properties.Resources.BGmusic4,
+                Properties.Resources.BGmusic5
+            };
 
-            // temp file for music 1
-            using (var ms = Properties.Resources.BGmusic)
-            using (var fs = new FileStream(music1, FileMode.Create, FileAccess.Write))
+            var musicPaths = new[] { music1, music2, music3, music4, music5 };
+            // loop for our temp music
+            for (int i = 0; i < musicResources.Length; i++)
             {
-                ms.CopyTo(fs);
+                musicPaths[i] = Path.GetTempFileName() + ".wav";
+                using (var ms = musicResources[i])
+                using (var fs = new FileStream(musicPaths[i], FileMode.Create, FileAccess.Write))
+                {
+                    ms.CopyTo(fs);
+                }
             }
-            // temp file for music 2
-            using (var ms2 = Properties.Resources.BGmusic2)
-            using (var fs2 = new FileStream(music2, FileMode.Create, FileAccess.Write))
-            {
-                ms2.CopyTo(fs2);
-            }
+
+            // save temp files as different paths index from 0
+            music1 = musicPaths[0];
+            music2 = musicPaths[1];
+            music3 = musicPaths[2];
+            music4 = musicPaths[3];
+            music5 = musicPaths[4];
+
 
             bgMusicPlayer = new WindowsMediaPlayer();
             bgMusicPlayer.settings.setMode("loop", true);
 
             // Start playing initial music based on level
-            currentMusic = (levelManager.CurrentLevel > 3) ? music2 : music1;
+            currentMusic = musicPaths[(levelManager.CurrentLevel - 1) % musicPaths.Length];
+
             bgMusicPlayer.URL = currentMusic;
             bgMusicPlayer.controls.play();
         }
@@ -241,8 +260,10 @@ namespace DoomLike
                     bullets.Clear();
                     levelTransitioning = false;
 
-                    // Optional: update background music based on level
-                    string nextMusic = (levelManager.CurrentLevel > 3) ? music2 : music1;
+                    // update background music each level
+                    var tracks = new[] { music1, music2, music3, music4, music5 };
+                    string nextMusic = tracks[(levelManager.CurrentLevel - 1) % tracks.Length];
+
                     if (currentMusic != nextMusic)
                     {
                         bgMusicPlayer.URL = nextMusic;
@@ -391,19 +412,6 @@ namespace DoomLike
                     break;
             }
 
-            if (state != WeaponState.Idle)
-            {
-                var revertTimer = new Timer();
-                revertTimer.Interval = (state == WeaponState.Shooting) ? 150 : 400;
-                revertTimer.Tick += (s, e) =>
-                {
-                    currentWeaponState = WeaponState.Idle;
-                    currentWeaponSprite = weaponIdle;
-                    ((Timer)s).Stop();
-                    ((Timer)s).Dispose();
-                };
-                revertTimer.Start();
-            }
         }
 
         // when closing the form, stop all timers and music so that game does not continue running in background
