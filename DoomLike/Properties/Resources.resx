@@ -202,4 +202,13 @@
   <data name="PlayerDeath" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\WeaponIMG\PlayerDeath.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="BGmusic3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\WeaponIMG\BGmusic3.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BGmusic4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\WeaponIMG\BGmusic4.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BGmusic5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\WeaponIMG\BGmusic5.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>
